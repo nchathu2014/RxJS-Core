@@ -1,5 +1,5 @@
 const {Observable} = require('rxjs');
-const {map,filter} = require('rxjs/operators');
+const {map,pluck} = require('rxjs/operators');
 
 const users = {
   data:[
@@ -36,7 +36,7 @@ const observable = new Observable((subscriber)=>{
   subscriber.next(users);
  
 }).pipe(
-  map(users => users.data),
+  pluck("data"),
   map(users => users.filter(user => user.status === 'active')),
   map(users => users.reduce((sum,user) => sum + user.age,0)/users.length),
   map(avgAge=>{
