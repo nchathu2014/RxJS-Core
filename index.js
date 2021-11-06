@@ -14,8 +14,26 @@ const users = {
   ]
 };
 
+const users1 = {
+  data:[
+    {status:'active',age:14},
+    {status:'active',age:44},
+    {status:'inactive',age:30},
+    {status:'active',age:64},
+    {status:'inactive',age:14},
+    {status:'active',age:24},
+    {status:'inactive',age:51},
+    {status:'active',age:17},
+  ]
+};
+
 const observable = new Observable((subscriber)=>{
   subscriber.next(users);
+  subscriber.next(users);
+  subscriber.next(users1); // Other emits will not continue, execution stops at this poiint
+  subscriber.next(users);
+  subscriber.next(users);
+ 
 }).pipe(
   map(users => users.data),
   map(users => users.filter(user => user.status === 'active')),
