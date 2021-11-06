@@ -29,8 +29,9 @@ const users1 = {
 
 const observable = new Observable((subscriber)=>{
   subscriber.next(users);
+ subscriber.complete(); // Other emits not continue from this point
+
   subscriber.next(users);
-  subscriber.next(users1); // Other emits will not continue, execution stops at this poiint
   subscriber.next(users);
   subscriber.next(users);
  
